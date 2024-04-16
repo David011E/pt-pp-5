@@ -75,9 +75,19 @@ class CreateCheckoutSessionView(View):
                 "product_id": product.id
             },
             mode='payment',
-            success_url=YOUR_DOMAIN + '/success/',
+            success_url=YOUR_DOMAIN + '/checkout_success/',
             cancel_url=YOUR_DOMAIN + '/cancel/',
         )
         return JsonResponse({
             'id': checkout_session.id
         })
+    
+
+def checkout_success():
+    template = 'products/checkout_success.html'
+    return(template)
+
+
+def checkout_cancel():
+    template = 'products/checkout_cancel.html'
+    return(template)

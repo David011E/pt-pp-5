@@ -38,7 +38,9 @@
                         </div>
                     </div>
                     <!-- Checkout Button -->
-                    <button type="button" id="checkout-button" class="btn btn-primary btn-block">Checkout</button>
+                    <form action="/create-checkout-session" method="POST">
+                        <button type="submit" id="checkout-button" class="btn btn-primary btn-block checkout-button">Checkout</button>
+                      </form>
                 </div>
             </div>
             {% if forloop.counter|divisibleby:1 %}
