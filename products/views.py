@@ -8,6 +8,10 @@ import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+def all_services(request):
+
+    return render(request, 'products/products.html')
+
 # Create your views here.
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
