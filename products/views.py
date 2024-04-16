@@ -1,16 +1,54 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views import View
-from .models import Product
+from django.db.models import Q
+from django.db.models.functions import Lower
+from .models import Product, Category
 from django.conf import settings
 from django.http import JsonResponse
+from .models import Product
+import sweetify
 
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def all_services(request):
+    products = Product.objects.all()
 
-    return render(request, 'products/products.html')
+    if request.GET:
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if sortkey == 'name':
+                sortkey = 'lower_name'
+                products = products.annotate(lower_name=Lower('name'))
+            if sortkey == 'category':
+                sortkey = 'category__name'
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            products = products.order_by(sortkey)
+            
+        if 'category' in request.GET:
+            categories = request.GET.getlist('category')
+            products = products.filter(category__name__in=categories)
+
+        if 'q' in request.GET:
+            query = request.GET['q']
+            if not query:
+                sweetify.error(request, 'error!', text='You didnt enter any search criteria!', timer=5000)
+                return redirect(reverse('all_services'))
+            
+            queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query)
+            products = products.filter(queries)
+    
+    context = {
+        "products": products,
+        "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY
+    }
+    return render(request, 'products/products.html', context)
+
 
 # Create your views here.
 class CreateCheckoutSessionView(View):

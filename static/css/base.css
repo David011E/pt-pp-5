@@ -10,6 +10,46 @@ body {
     font-family: 'Lato';
 }
 
+.overlay {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: white;
+	z-index: -1;
+}
+
+.card {
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+}
+
+.card-img-top {
+    border-top-left-radius: 10px; /* Rounded corners for top-left */
+    border-top-right-radius: 10px; /* Rounded corners for top-right */
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.card-title {
+    font-size: 1.25rem; /* Title font size */
+    color: #333; /* Title color */
+}
+
+.card-footer {
+    border-top: none; /* Remove top border */
+}
+
+.card-footer p {
+    font-size: 1.5rem; /* Price font size */
+    color: #007bff; /* Price color */
+}
+
+.card-footer .product-price {
+    color: black;
+}
+
+
 /* from Bulma */
 .icon {
     align-items: center;

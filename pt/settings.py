@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'home',
     'products',
+
+    'sweetify'
 ]
 
 MIDDLEWARE = [
@@ -110,6 +112,8 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'pt.wsgi.application'
+
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 
 # Database
