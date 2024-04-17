@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
+from django.views.generic import TemplateView
 from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Product, Category
 from django.conf import settings
-from django.http import JsonResponse
 from .models import Product
 import sweetify
 
@@ -50,12 +50,15 @@ def all_services(request):
     return render(request, 'products/products.html', context)
 
 
-# Create your views here.
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
         product_id = self.kwargs["pk"]
         product = Product.objects.get(id=product_id)
         YOUR_DOMAIN = "http://127.0.0.1:8000"
+
+        # Get the URL of the product image
+        product_image_url = request.build_absolute_uri(product.image)
+
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -65,7 +68,7 @@ class CreateCheckoutSessionView(View):
                         'unit_amount': product.price,
                         'product_data': {
                             'name': product.name,
-                            'images': product.image,
+                            'images': [product_image_url],  # Wrap the URL in a list
                         },
                     },
                     'quantity': 1,
@@ -75,19 +78,20 @@ class CreateCheckoutSessionView(View):
                 "product_id": product.id
             },
             mode='payment',
-            success_url=YOUR_DOMAIN + '/checkout_success/',
-            cancel_url=YOUR_DOMAIN + '/cancel/',
+            success_url=YOUR_DOMAIN + reverse('checkout_success'),  # Construct success URL using reverse
+            cancel_url=YOUR_DOMAIN + reverse('checkout_cancel'),  # Construct cancel URL using reverse
+            locale='en',
         )
-        return JsonResponse({
-            'id': checkout_session.id
-        })
+
+        # Construct the checkout URL using the 'url' field from the session object
+        checkout_url = checkout_session.url
+
+        return redirect(checkout_url)
     
 
-def checkout_success():
-    template = 'products/checkout_success.html'
-    return(template)
+class checkout_success(TemplateView):
+    template_name = "products/checkout_success.html"
 
 
-def checkout_cancel():
+class checkout_cancel(TemplateView):
     template = 'products/checkout_cancel.html'
-    return(template)

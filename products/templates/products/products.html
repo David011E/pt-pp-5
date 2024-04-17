@@ -38,9 +38,10 @@
                         </div>
                     </div>
                     <!-- Checkout Button -->
-                    <form action="/create-checkout-session" method="POST">
-                        <button type="submit" id="checkout-button" class="btn btn-primary btn-block checkout-button">Checkout</button>
-                      </form>
+                    <form id="create-checkout-session" method="POST" action="{% url 'create-checkout-session' product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-block checkout-button">Checkout</button>
+                    </form>
                 </div>
             </div>
             {% if forloop.counter|divisibleby:1 %}
@@ -67,7 +68,7 @@
         </div>
         <hr> <!-- Add a horizontal line after all the cards -->
     </section>
-    {% csrf_token %}
+    
 </div>
 {% endblock %}
 

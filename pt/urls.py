@@ -17,12 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from products.views import CreateCheckoutSessionView
+from products.views import (
+    CreateCheckoutSessionView,
+    checkout_success,
+    checkout_cancel,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('products/', include('products.urls')),
-    path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session')
+    path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
+    path('products/checkout_success/', checkout_success.as_view(), name='checkout_success'),  
+    path('checkout_cancel/', checkout_cancel.as_view(), name='checkout_cancel'), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
