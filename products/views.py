@@ -60,24 +60,18 @@ class CreateCheckoutSessionView(View):
         product_image_url = request.build_absolute_uri(product.image)
 
         checkout_session = stripe.checkout.Session.create(
+            client_reference_id=request.user.id if request.user.is_authenticated else None,
             payment_method_types=['card'],
+            mode='subscription',
             line_items=[
                 {
-                    'price_data': {
-                        'currency': 'usd',
-                        'unit_amount': product.price,
-                        'product_data': {
-                            'name': product.name,
-                            'images': [product_image_url],  # Wrap the URL in a list
-                        },
-                    },
+                    'price': settings.STRIPE_PRICE_ID,  # Use price ID directly here
                     'quantity': 1,
                 },
             ],
             metadata={
                 "product_id": product.id
             },
-            mode='payment',
             success_url=YOUR_DOMAIN + reverse('checkout_success'),  # Construct success URL using reverse
             cancel_url=YOUR_DOMAIN + reverse('checkout_cancel'),  # Construct cancel URL using reverse
             locale='en',
@@ -87,6 +81,7 @@ class CreateCheckoutSessionView(View):
         checkout_url = checkout_session.url
 
         return redirect(checkout_url)
+
     
 
 class checkout_success(TemplateView):
