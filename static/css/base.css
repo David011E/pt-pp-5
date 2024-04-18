@@ -70,6 +70,35 @@ body {
     background-color: #0056b3; /* Darker color on hover */
 }
 
+.learn-more-link,
+.learn-more-link a {
+    text-decoration: none !important; /* Remove underline */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.learn-more-link:hover {
+    background-color: #f0f0f0 !important; /* Change background color on hover */
+}
+
+.service-page-top {
+    margin-top: 15px;
+}
+
+.product_details_image {
+    width: 100%; /* Make the image width 100% of its container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.btn-black {
+    background-color: black; /* Set background color to black */
+    color: white; /* Set text color to white */
+    border: none; /* Remove border */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.btn-black:hover {
+    background-color: #222; /* Darken background color on hover */
+}
 
 
 /* from Bulma */

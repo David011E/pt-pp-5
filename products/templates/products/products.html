@@ -12,7 +12,7 @@
     </div>
 
     <!-- Additional content -->
-    <section>
+    <section class="service-page-top">
         <div class="row service-page">
             {% for product in products %}
             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -28,6 +28,18 @@
                     {% endif %}
                     <div class="card-body pb-0">
                         <h5 class="card-title mb-1">{{ product.name }}</h5>
+                        {% if product.category %}
+                            <p class="small mt-1 mb-0">
+                                <a class="text-muted" href="">
+                                        <i class="fas fa-tag mr-1"></i>{{ product.category }}
+                                </a>
+                            </p>                    
+                        {% endif %}
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="{% url 'product_details' product.id %}" class="learn-more-link">
+                            <h3 class="card-title mb-1">Learn more</h3>
+                        </a>
                     </div>
                     <div class="card-footer bg-white pt-0 border-0 text-left">
                         <div class="row">
