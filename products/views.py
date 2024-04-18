@@ -89,4 +89,4 @@ class checkout_success(TemplateView):
 
 
 class checkout_cancel(TemplateView):
-    template = 'products/checkout_cancel.html'
+    template_name = 'products/checkout_cancel.html'
