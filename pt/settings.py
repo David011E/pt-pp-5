@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'home',
     'products',
 
-    'sweetify'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
