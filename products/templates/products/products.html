@@ -12,6 +12,17 @@
     </div>
 
     <!-- Additional content -->
+    <div class="row mt-1 mb-2">
+        <div class="col-12 col-md-6 order-md-first">
+            <p class="text-muted mt-3 text-center text-md-left">
+                {% if search_term or current_categories or current_sorting != 'None_None' %}
+                    <span class="small"><a href="{% url 'products' %}">All personal training services</a> | </span>
+                {% endif %}
+                {{ products|length }} Services{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+            </p>
+        </div>
+    </div>
+    <!-- End of additional content -->
     <section class="service-page-top">
         <div class="row service-page">
             {% for product in products %}
@@ -30,7 +41,7 @@
                         <h5 class="card-title mb-1">{{ product.name }}</h5>
                         {% if product.category %}
                             <p class="small mt-1 mb-0">
-                                <a class="text-muted" href="">
+                                <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
                                         <i class="fas fa-tag mr-1"></i>{{ product.category }}
                                 </a>
                             </p>                    
