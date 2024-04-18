@@ -21,33 +21,55 @@ body {
 }
 
 .card {
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    border-radius: 15px; /* Increased border radius for a softer look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    padding: 15px; /* Added padding for space inside the card */
+    margin-bottom: 20px; /* Added margin between cards */
+    background-color: #fff; /* Added background color to make cards stand out */
+    transition: transform 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift the card slightly on hover */
 }
 
 .card-img-top {
-    border-top-left-radius: 10px; /* Rounded corners for top-left */
-    border-top-right-radius: 10px; /* Rounded corners for top-right */
-    object-fit: cover; /* Ensure the image covers the entire container */
+    border-top-left-radius: 15px; /* Adjusted border radius for image */
+    border-top-right-radius: 15px; /* Adjusted border radius for image */
+    object-fit: cover;
+    height: 200px; /* Set a fixed height for the image */
 }
 
 .card-title {
-    font-size: 1.25rem; /* Title font size */
-    color: #333; /* Title color */
+    font-size: 1.5rem; /* Increased font size for the title */
+    color: #333; /* Darkened text color for better contrast */
+    margin-bottom: 10px; /* Added margin below the title */
 }
 
 .card-footer {
-    border-top: none; /* Remove top border */
+    border-top: none;
+    padding-top: 10px; /* Added padding to separate footer from body */
 }
 
 .card-footer p {
-    font-size: 1.5rem; /* Price font size */
-    color: #007bff; /* Price color */
+    font-size: 1.25rem; /* Reduced font size for price */
+    color: #212427 !important; /* Price color */
 }
 
-.card-footer .product-price {
-    color: black;
+
+.checkout-button {
+    margin-top: 10px; /* Added margin above the button */
+    background-color: #007bff; /* Button color */
+    color: #fff; /* Button text color */
+    border: none; /* Removed button border */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    font-weight: bold;
 }
+
+.checkout-button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}
+
 
 
 /* from Bulma */
