@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView
 from django.db.models import Q
+from django.contrib import messages
 from django.db.models.functions import Lower
 from .models import Product, Category
 from django.conf import settings
 from .models import Product
-import sweetify
 
 import stripe
 
@@ -14,6 +14,11 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def all_services(request):
     products = Product.objects.all()
+
+    query = None
+    categories = None
+    sort = None
+    direction = None
 
     if request.GET:
         if 'sort' in request.GET:
@@ -31,21 +36,27 @@ def all_services(request):
             products = products.order_by(sortkey)
             
         if 'category' in request.GET:
-            categories = request.GET.getlist('category')
-            products = products.filter(category__name__in=categories)
+            categories = request.GET['category'].split(',')
+            services = services.filter(category__name__in=categories)
+            categories = Category.objects.filter(name__in=categories)
 
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                sweetify.error(request, 'error!', text='You didnt enter any search criteria!', timer=5000)
+                messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('all_services'))
+
             
             queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query)
             products = products.filter(queries)
+
+    current_sorting = f'{sort}_{direction}'
     
     context = {
         "products": products,
-        "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY
+        'search_term': query,
+        'current_categories': categories,
+        'current_sorting': current_sorting,
     }
     return render(request, 'products/products.html', context)
 

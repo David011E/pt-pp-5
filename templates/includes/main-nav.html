@@ -5,10 +5,10 @@
                 Training Services
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-training-services-link">
-                <a href="" class="dropdown-item">Training plan</a> <!-- Example submenu items -->
-                <a href="" class="dropdown-item">Online training</a>
-                <a href="" class="dropdown-item">1-ON-1 Training</a>
-                <a href="" class="dropdown-item">All training services</a>
+                <a href="{% url 'products' %}?q=Training%20plan" class="dropdown-item">Training plan</a>
+                <a href="{% url 'products' %}?q=Online%20training" class="dropdown-item">Online training</a>
+                <a href="{% url 'products' %}?q=1-ON-1%20Training" class="dropdown-item">1-ON-1 Training</a>
+                <a href="{% url 'products' %}" class="dropdown-item">All training services</a>
             </div>
         </li>
 
