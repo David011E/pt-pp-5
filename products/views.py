@@ -65,7 +65,7 @@ class CreateCheckoutSessionView(View):
             mode='subscription',
             line_items=[
                 {
-                    'price': settings.STRIPE_PRICE_ID,  # Use price ID directly here
+                    'price': product.stripe_price_id,  # Use price ID directly here
                     'quantity': 1,
                 },
             ],
