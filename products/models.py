@@ -16,6 +16,7 @@ class Product(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=100)
     description = models.TextField()
+    stripe_price_id = models.TextField()
     price = models.IntegerField(default=0) #cents
     image = models.ImageField(null=True, blank=True)
 
