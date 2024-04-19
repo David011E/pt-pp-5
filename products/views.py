@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django.db.models.functions import Lower
 from .models import Product, Category
+from allauth.account.models import EmailAddress
 from django.conf import settings
 from .models import Product
 
@@ -70,10 +71,35 @@ class CreateCheckoutSessionView(View):
         # Get the URL of the product image
         product_image_url = request.build_absolute_uri(product.image)
 
+        # Retrieve the user's email address
+        email_address = get_object_or_404(EmailAddress, user=request.user, primary=True)
+        
+        # Retrieve or create a Stripe Customer object for the user if authenticated
+        if request.user.is_authenticated:
+            try:
+                customer = stripe.Customer.retrieve(email_address.stripe_customer_id)
+            except stripe.error.InvalidRequestError:
+                # If the customer doesn't exist, create a new one
+                customer = stripe.Customer.create(email=email_address.email)
+                email_address.stripe_customer_id = customer.id
+                email_address.save()
+        else:
+            customer = None
+
+        # Check if the user is already subscribed to the product using Stripe API
+        if customer:
+            subscriptions = stripe.Subscription.list(customer=customer.id)
+            for subscription in subscriptions.auto_paging_iter():
+                if subscription['status'] == 'active' and subscription['items']['data'][0]['price']['id'] == product.stripe_price_id:
+                    messages.error(request, "You are already subscribed to this product.")
+                    return redirect(reverse('checkout_cancel'))
+
+        # Continue with creating the checkout session
         checkout_session = stripe.checkout.Session.create(
             client_reference_id=request.user.id if request.user.is_authenticated else None,
             payment_method_types=['card'],
             mode='subscription',
+            customer=customer.id if customer else None,  # Use existing customer if authenticated
             line_items=[
                 {
                     'price': product.stripe_price_id,  # Use price ID directly here
