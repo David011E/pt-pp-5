@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.conf import settings
 from allauth.account.models import EmailAddress
 import stripe
+import sweetify
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -42,3 +43,25 @@ class UserProfileView(LoginRequiredMixin, View):
 
         # Render the user profile template with the user's subscriptions
         return render(request, 'userprofile/userprofile.html', {'user_subscriptions': user_subscriptions})
+    
+
+class CancelSubscriptionView(View):
+    def post(self, request, *args, **kwargs):
+        email_address = EmailAddress.objects.filter(user=request.user, primary=True).first()
+        if not email_address:
+            # Handle the case where no email_address is found
+            return redirect(reverse('userprofile'))  # Redirect as needed
+
+        customer = stripe.Customer.retrieve(email_address.stripe_customer_id)
+        
+        # Correctly retrieve subscriptions
+        subscriptions = stripe.Subscription.list(customer=customer.id)
+        if subscriptions and subscriptions.data:
+            subscription_id = subscriptions.data[0].id  # Assume you want to cancel the first subscription
+            stripe.Subscription.delete(subscription_id)  # Immediately cancel the subscription
+            sweetify.success(self.request, 'You subscription was successfully cancelled')
+        else:
+            # Handle the case where no subscriptions are found
+            return redirect(reverse('userprofile'))  # Redirect as needed
+
+        return redirect(reverse('userprofile'))

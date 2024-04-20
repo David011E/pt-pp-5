@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'userprofile',
 
     'crispy_forms',
+    'sweetify'
 ]
 
 MIDDLEWARE = [
