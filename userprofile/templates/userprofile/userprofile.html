@@ -62,28 +62,5 @@
         </div>
     </section>
 </div>
-{% endblock %}
 
-
-{% block postloadjs %}
-{{ block.super }}
-$.ajax({
-    type: 'POST',
-    url: '{% url 'cancel_subscription' %}',
-    data: {
-        // Include any necessary data here
-    },
-    success: function(response) {
-        if (response.success) {
-            swal("Success!", response.message, "success");
-            // Redirect or perform any other action after success if needed
-        } else {
-            swal("Error!", response.message, "error");
-            // Handle error case
-        }
-    },
-    error: function(xhr, textStatus, errorThrown) {
-        swal("Error!", "Failed to cancel subscription.", "error");
-    }
-});
 {% endblock %}
