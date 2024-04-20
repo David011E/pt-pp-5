@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('products/', include('products.urls')),
+    path('userprofile/', include('userprofile.urls')),
     path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     path('products/checkout_success/', checkout_success.as_view(), name='checkout_success'),  
     path('checkout_cancel/', checkout_cancel.as_view(), name='checkout_cancel'), 
