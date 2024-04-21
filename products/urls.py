@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import StripeWebhookView  # Import your view
 
 urlpatterns = [
     path('', views.all_services, name='products'),  

@@ -8,6 +8,8 @@ from .models import Product, Category
 from allauth.account.models import EmailAddress
 from django.conf import settings
 from .models import Product
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 import stripe
 
@@ -141,3 +143,38 @@ class checkout_success(TemplateView):
 
 class checkout_cancel(TemplateView):
     template_name = 'products/checkout_cancel.html'
+
+
+class StripeWebhookView(View):
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(StripeWebhookView, self).dispatch(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        payload = request.body
+        sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+        endpoint_secret = settings.STRIPE_WEBHOOK_SECRET  # Replace 'whsec_...' with your actual webhook signing secret
+
+        try:
+            event = stripe.Webhook.construct_event(
+                payload, sig_header, endpoint_secret
+            )
+        except ValueError:
+            # Invalid payload
+            return HttpResponse(status=400)
+        except stripe.error.SignatureVerificationError:
+            # Invalid signature
+            return HttpResponse(status=400)
+
+        # Handle the event
+        if event['type'] == 'checkout.session.completed':
+            session = event['data']['object']
+            # Handle the checkout session completion
+            handle_checkout_session(session)
+
+        # Respond to Stripe that the webhook was received
+        return JsonResponse({'status': 'success'})
+
+def handle_checkout_session(session):
+    # Implement your business logic here
+    print("Checkout session completed with session ID:", session['id'])

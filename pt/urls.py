@@ -21,6 +21,7 @@ from products.views import (
     CreateCheckoutSessionView,
     checkout_success,
     checkout_cancel,
+    StripeWebhookView,
 )
 
 urlpatterns = [
@@ -30,6 +31,7 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('userprofile/', include('userprofile.urls')),
     path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
+    path('webhook/stripe/', StripeWebhookView.as_view(), name='stripe-webhook'),
     path('products/checkout_success/', checkout_success.as_view(), name='checkout_success'),  
     path('checkout_cancel/', checkout_cancel.as_view(), name='checkout_cancel'), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
