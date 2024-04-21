@@ -13,7 +13,8 @@ class ProductForm(forms.ModelForm):
         category_choices = [(c.id, c.name) for c in categories]
 
         self.fields['category'].choices = category_choices
-        self.fields['price'].label += ' (In cents)'  # Add suffix to the price label
+        self.fields['stripe_price_id'].label += ' | User must get this from stripe'  # Add suffix to the price label
+        self.fields['price'].label += ' | (In cents)'  # Add suffix to the price label
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
