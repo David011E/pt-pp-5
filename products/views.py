@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import ProductForm
 
 import stripe
+import sweetify
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -184,8 +185,18 @@ def handle_checkout_session(session):
 
 def add_product(request):
     """ Add a product to the store """
-    form = ProductForm()
-    template = 'products/add_product.html'  
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            sweetify.success(request, 'Successfully added product!')
+            return redirect(reverse('product_details', args=[product.id]))
+        else:
+            sweetify.error(request, 'Failed to add product. Please ensure the form is valid.')
+    else:
+        form = ProductForm()
+        
+    template = 'products/add_product.html'
     context = {
         'form': form,
     }
