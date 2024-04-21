@@ -10,6 +10,7 @@ from django.conf import settings
 from .models import Product
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from .forms import ProductForm
 
 import stripe
@@ -66,6 +67,7 @@ def all_services(request):
     return render(request, 'products/products.html', context)
 
 
+@login_required
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
         product_id = self.kwargs["pk"]
@@ -182,9 +184,14 @@ def handle_checkout_session(session):
     print("Checkout session completed with session ID:", session['id'])
 
 
-
+@login_required
 def add_product(request):
     """ Add a product to the store """
+
+    if not request.user.is_superuser:
+        sweetify.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
@@ -203,9 +210,13 @@ def add_product(request):
 
     return render(request, template, context)
 
-
+@login_required
 def edit_product(request, product_id):
     """ Edit a product in the store """
+
+    if not request.user.is_superuser:
+        sweetify.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
 
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
@@ -229,9 +240,10 @@ def edit_product(request, product_id):
 
     return render(request, template, context)
 
-
+@login_required
 def delete_product(request, product_id):
     """ Delete a product in the store """
+    
     if not request.user.is_superuser:
         sweetify.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
