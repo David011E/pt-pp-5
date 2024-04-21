@@ -10,6 +10,7 @@ from django.conf import settings
 from .models import Product
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from .forms import ProductForm
 
 import stripe
 
@@ -178,3 +179,15 @@ class StripeWebhookView(View):
 def handle_checkout_session(session):
     # Implement your business logic here
     print("Checkout session completed with session ID:", session['id'])
+
+
+
+def add_product(request):
+    """ Add a product to the store """
+    form = ProductForm()
+    template = 'products/add_product.html'  
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
