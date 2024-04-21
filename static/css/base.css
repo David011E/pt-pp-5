@@ -190,6 +190,13 @@ body {
     .logo-font {
         margin-top: 100px; /* Adjust the margin-top value as needed */
     }
+    .navbar-nav .nav-item,
+  .navbar-nav .nav-link {
+    margin-top: 15px !important; /* Removes space above each item/link */
+    margin-bottom: 0 !important; /* Removes space below each item/link */
+    padding-top: 0 !important; /* Removes padding above each link */
+    padding-bottom: 0 !important; /* Removes padding below each link */
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
