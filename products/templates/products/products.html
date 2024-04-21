@@ -62,8 +62,8 @@
                     </div>
                     {% if request.user.is_superuser %}
                         <small class="ml-3">
-                            <a href="{% url 'edit_product' product.id %}">Edit</a> |
-                            <a class="text-danger" href="">Delete</a>
+                            <a class="btn btn-secondary pd-page-button" href="{% url 'edit_product' product.id %}">Edit</a>
+                        <a class="btn btn-danger pd-page-button" href="{% url 'delete_product' product.id %}">Delete</a>
                         </small>
                     {% endif %}
                     <!-- Checkout Button -->

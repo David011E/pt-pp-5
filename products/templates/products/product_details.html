@@ -31,11 +31,17 @@
                 <p class="mb-0">{{ product.name }}</p>
                 <p class="lead mb-0 text-left font-weight-bold">${{ product.get_display_price }}</p>
                 <p class="mt-3">{{ product.description }}</p>
+                {% if request.user.is_superuser %}
+                    <small>
+                        <a class="btn btn-secondary pd-page-button" href="{% url 'edit_product' product.id %}">Edit</a>
+                        <a class="btn btn-danger pd-page-button" href="{% url 'delete_product' product.id %}">Delete</a>
+                    </small>
+                {% endif %}
                 <form class="form" id="add-to-bag-form">
                     {% csrf_token %}
                     <div class="form-row align-items-center">
                         <div class="col-auto">
-                            <a href="{% url 'products' %}" class="btn btn-black rounded-0">
+                            <a href="{% url 'products' %}" class="btn btn-black rounded-0 pd-page">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>

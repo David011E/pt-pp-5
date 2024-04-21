@@ -178,6 +178,9 @@ body {
     border-color: #222; /* Add black border */
 }
 
+.pd-page {
+    margin-top: 15px;
+}
 
 /* -------------------------------- Media Queries */
 

@@ -18,7 +18,7 @@ class Product(models.Model):
     description = models.TextField()
     stripe_price_id = models.TextField()
     price = models.IntegerField(default=0) #cents
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField()
 
     def __str__(self):
         return self.name
