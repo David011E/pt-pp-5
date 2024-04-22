@@ -3,15 +3,14 @@ from .models import Product, Category
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field
-from .widgets import CustomClearableFileInput  # Import your custom widget
+from .widgets import CustomClearableFileInput
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
-        widgets = {
-            'image': CustomClearableFileInput,  # Use your custom widget for the image field
-        }
+
+    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -40,3 +39,4 @@ class ProductForm(forms.ModelForm):
         Field('price'),
         Field('image'),
     )
+
