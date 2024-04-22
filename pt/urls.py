@@ -30,6 +30,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('products/', include('products.urls')),
     path('userprofile/', include('userprofile.urls')),
+    path('results/', include('results.urls')),
     path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     path('webhook/stripe/', StripeWebhookView.as_view(), name='stripe-webhook'),
     path('products/checkout_success/', checkout_success.as_view(), name='checkout_success'),  

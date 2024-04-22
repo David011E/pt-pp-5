@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'home',
     'products',
     'userprofile',
+    'results',
 
     'crispy_forms',
     'sweetify'
