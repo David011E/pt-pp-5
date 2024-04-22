@@ -211,6 +211,239 @@ body {
     border-radius: 0;
 }
 
+.banner {
+    align-items: center;
+    text-align: center;
+}
+
+.signin-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-top: 200px;
+  }
+  
+  .signin-container h1 {
+    text-align: center;
+  }
+  
+  .socialaccount_ballot {
+    margin-top: 20px;
+  }
+  
+  .socialaccount_ballot .socialaccount_providers {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .socialaccount_ballot .login-or {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .login-form {
+    margin-top: 20px;
+  }
+  
+  .forgot-password {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .signin-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .signout-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 150px;
+  }
+  
+  .signout-container h1 {
+    margin-top: 0;
+  }
+  
+  .signout-container p {
+    margin-bottom: 20px;
+  }
+  
+  .signout-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .confirm-email-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 250px;
+  }
+  
+  .confirm-email-container h1 {
+    margin-top: 0;
+  }
+  
+  .confirm-email-container p {
+    margin-bottom: 20px;
+  }
+  
+  .confirm-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .signup-box {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .signup-box h1 {
+    margin-top: 0;
+  }
+  
+  .signup-box p {
+    margin-bottom: 20px;
+  }
+  
+  .signup-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+    
+  .verification-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .verification-box {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .verification-box h1 {
+    margin-top: 0;
+  }
+  
+  .verification-box p {
+    margin-bottom: 20px;
+  }
+  
+  .change-password-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .change-password-box {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .change-password-box h1 {
+    margin-top: 0;
+  }
+  
+  .change-password-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .password-reset-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .password-reset-box {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .password-reset-box h1 {
+    margin-top: 0;
+  }
+  
+  .password-reset-box p {
+    margin-bottom: 20px;
+  }
+  
+  .reset-password-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
@@ -233,6 +466,24 @@ body {
     .header-container {
         padding-top: 164px;
     }
+    .navbar-expand-lg .navbar-nav {
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin-top: 0; /* Removes any top margin */
+        padding-top: 0; /* Removes any top padding */
+      }
+
+
+    .signout-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 250px;
+  }
 }
 
 @media (max-width: 576px) {
