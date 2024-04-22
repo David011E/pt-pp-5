@@ -6,14 +6,12 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.conf import settings
 from allauth.account.models import EmailAddress
-from django.contrib.auth.decorators import login_required
 import stripe
 import sweetify
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your views here.
-@login_required
 class UserProfileView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         # Retrieve the user's email address
@@ -46,8 +44,7 @@ class UserProfileView(LoginRequiredMixin, View):
         # Render the user profile template with the user's subscriptions
         return render(request, 'userprofile/userprofile.html', {'user_subscriptions': user_subscriptions})
     
-@login_required
-class CancelSubscriptionView(View):
+class CancelSubscriptionView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         email_address = EmailAddress.objects.filter(user=request.user, primary=True).first()
         if not email_address:

@@ -11,6 +11,7 @@ from .models import Product
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProductForm
 
 import stripe
@@ -67,8 +68,7 @@ def all_services(request):
     return render(request, 'products/products.html', context)
 
 
-@login_required
-class CreateCheckoutSessionView(View):
+class CreateCheckoutSessionView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         product_id = self.kwargs["pk"]
         product = Product.objects.get(id=product_id)
@@ -243,7 +243,7 @@ def edit_product(request, product_id):
 @login_required
 def delete_product(request, product_id):
     """ Delete a product in the store """
-    
+
     if not request.user.is_superuser:
         sweetify.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
