@@ -115,7 +115,7 @@ class CreateCheckoutSessionView(LoginRequiredMixin, View):
             metadata={
                 "product_id": product.id
             },
-            success_url=YOUR_DOMAIN + reverse('checkout_success'),  # Construct success URL using reverse
+            success_url=YOUR_DOMAIN + reverse('userprofile'),  # Construct success URL using reverse
             cancel_url=YOUR_DOMAIN + reverse('checkout_cancel'),  # Construct cancel URL using reverse
             locale='en',
         )
