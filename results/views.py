@@ -1,14 +1,19 @@
 from django.shortcuts import render, redirect, reverse
 from .forms import ReviewForm
+from .models import Review 
 
 import sweetify
 
 # Create your views here.
 def results(request):
     """
-    A view to return index page
+    A view to return index page with reviews
     """
-    return render(request, 'results/results.html')
+    reviews = Review.objects.all()  # Fetch all reviews
+    context = {
+        'reviews': reviews,
+    }
+    return render(request, 'results/results.html', context)
 
 
 def add_review(request):
