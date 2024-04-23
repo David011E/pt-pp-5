@@ -19,7 +19,7 @@
                     <p class="mb-0"><h1>{{ message.name }}</h1></p>
                     <p class="mt-3">{{ message.email }}</p>
                     <p class="mt-3">{{ message.description }}</p>
-                    <a class="btn btn-danger pd-page-button" href="">Delete</a>
+                    <a class="btn btn-danger pd-page-button" href="{% url 'delete_message' message.id %}">Delete</a>
                 </div>
             </div>
         </div>

@@ -54,3 +54,15 @@ def contact_details(request, contact_id):
     }
 
     return render(request, template, context)
+
+def delete_message(request, contact_id):
+    """ Delete a message in the store """
+
+    if not request.user.is_superuser:
+        sweetify.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+    
+    message = get_object_or_404(Contact, pk=contact_id)
+    message.delete()
+    sweetify.success(request, 'Message deleted!')
+    return redirect(reverse('contact'))

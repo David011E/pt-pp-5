@@ -21,7 +21,7 @@
                         <h5 class="card-title mb-1">{{ contact.name }}</h5>
                     </div>
                     <h5 class="card-title mb-1">{{ contact.email }}</h5>
-                    <a href="" class="btn btn-danger pd-page-button">Delete</a>
+                    <a href="{% url 'delete_message' contact.id %}" class="btn btn-danger pd-page-button">Delete</a>
                     <div class="card-body pb-0">
                         <!-- Link to more details if applicable -->
                         <a href="{% url 'contact_details' contact.id %}" class="learn-more-link">
