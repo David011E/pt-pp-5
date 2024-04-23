@@ -81,3 +81,16 @@ def edit_review(request, reviews_id):
     }
 
     return render(request, template, context)
+
+
+def delete_review(request, reviews_id):
+    """ Delete a product in the store """
+
+    if not request.user.is_superuser:
+        sweetify.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+    
+    review = get_object_or_404(Review, pk=reviews_id)
+    review.delete()
+    sweetify.success(request, 'Review deleted!')
+    return redirect(reverse('results'))
