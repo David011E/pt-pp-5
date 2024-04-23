@@ -453,6 +453,10 @@ body {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
+.fbook_link{
+  padding-left: 15px;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
