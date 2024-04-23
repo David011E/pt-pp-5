@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .forms import ReviewForm
 from .models import Review 
 
@@ -37,3 +37,17 @@ def add_review(request):
     }
 
     return render(request, template, context)
+
+
+def review_details(request, reviews_id):
+    """
+    A view to show individual service details
+    """
+
+    reveiws = get_object_or_404(Review, pk=reviews_id)  # Retrieve a single service object
+
+    context = {
+        'reveiws': reveiws,  # Pass the single service object to the template
+    }
+
+    return render(request, 'results/review_details.html', context)  
