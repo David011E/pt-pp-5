@@ -31,7 +31,26 @@ def contact_admin(request):
 
     contacts = Contact.objects.all()
 
+    template = 'contact/contact_admin.html'
+
     context = {
         'contact': contacts,
     }
-    return render(request, 'contact/contact_admin.html', context)
+    return render(request, template, context)
+
+
+def contact_details(request, contact_id):
+    """
+    A view to show individual contact details
+    """
+
+    # Retrieve a single contact object based on contact_id
+    message = get_object_or_404(Contact, pk=contact_id)
+
+    template = 'contact/contact_details.html'
+
+    context = {
+        'message': message,  # Pass the single contact object to the template
+    }
+
+    return render(request, template, context)
