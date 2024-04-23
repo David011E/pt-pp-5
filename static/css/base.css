@@ -452,6 +452,27 @@ body {
     border-radius: 0.375rem; /* rounded-lg */
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
+
+  /* enhanced-styles.css */
+.enhanced-card {
+  width: 100%; /* Set to desired width */
+  margin: 10px 0; /* Add some vertical margin */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+  transition: 0.3s; /* Animation for hover effects */
+}
+
+.enhanced-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Larger shadow when card is hovered */
+}
+
+.enhanced-card-header {
+  padding: 2px 16px; /* Adjust padding */
+}
+
+.enhanced-card-content {
+  padding: 16px; /* Padding for the content */
+}
+
   
   .file-upload:hover {
     border-color: #0056b3;

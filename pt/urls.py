@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from contact.views import contact_admin
 from products.views import (
     CreateCheckoutSessionView,
     checkout_success,
@@ -33,6 +34,7 @@ urlpatterns = [
     path('results/', include('results.urls')),
     path('about/', include('about.urls')),
     path('contact/', include('contact.urls')),
+    path('contact_admin/', contact_admin, name='contact_admin'),
     path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     path('webhook/stripe/', StripeWebhookView.as_view(), name='stripe-webhook'),
     path('products/checkout_success/', checkout_success.as_view(), name='checkout_success'),  
