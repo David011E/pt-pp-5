@@ -32,8 +32,8 @@
                     </div>
                     {% if request.user.is_superuser %}
                         <small class="ml-3">
-                            <a class="btn btn-secondary pd-page-button" href="">Edit</a>
-                        <a class="btn btn-danger pd-page-button" href="">Delete</a>
+                            <a href="{% url 'edit_review' review.id %}" class="btn btn-secondary pd-page-button">Edit</a>
+                        <a href="" class="btn btn-danger pd-page-button">Delete</a>
                         </small>
                     {% endif %}
                     <div class="card-body pb-0">

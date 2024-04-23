@@ -442,6 +442,22 @@ body {
     border-radius: 4px;
     cursor: pointer;
   }
+
+  .file-upload {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 2px solid #007bff;
+    border-radius: 0.375rem; /* rounded-lg */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .file-upload:hover {
+    border-color: #0056b3;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  }
+  
   
   
 /* -------------------------------- Media Queries */
