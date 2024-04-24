@@ -72,7 +72,7 @@ class CreateCheckoutSessionView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         product_id = self.kwargs["pk"]
         product = Product.objects.get(id=product_id)
-        YOUR_DOMAIN = "http://127.0.0.1:8000"
+        YOUR_DOMAIN = "https://pt-pp-5-a54db706b854.herokuapp.com/"
 
         # Get the URL of the product image
         product_image_url = request.build_absolute_uri(product.image)
