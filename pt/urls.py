@@ -21,6 +21,7 @@ from contact.views import (
     contact_admin,
     contact_details
 )
+from userprofile.views import UserProfileView
 from products.views import (
     CreateCheckoutSessionView,
     checkout_success,
@@ -40,6 +41,7 @@ urlpatterns = [
     path('contact_admin/', contact_admin, name='contact_admin'),
     path('contact_details/<int:contact_id>/', contact_details, name='contact_details'),
     path('create-checkout-session/<pk>/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
+    path('userprofile/', UserProfileView.as_view(), name='userprofile'),
     path('webhook/stripe/', StripeWebhookView.as_view(), name='stripe-webhook'),
     path('products/checkout_success/', checkout_success.as_view(), name='checkout_success'),  
     path('checkout_cancel/', checkout_cancel.as_view(), name='checkout_cancel'), 
