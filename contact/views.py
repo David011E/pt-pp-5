@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .forms import ContactForm
 from .models import Contact 
+from django.contrib.auth.decorators import login_required
 
 import sweetify
 
@@ -26,6 +27,7 @@ def contact(request):
     return render(request, template, context)
 
 
+@login_required
 def contact_admin(request):
     """ Where admin can view messages """
 
@@ -39,6 +41,7 @@ def contact_admin(request):
     return render(request, template, context)
 
 
+@login_required
 def contact_details(request, contact_id):
     """
     A view to show individual contact details
@@ -55,6 +58,8 @@ def contact_details(request, contact_id):
 
     return render(request, template, context)
 
+
+@login_required
 def delete_message(request, contact_id):
     """ Delete a message in the store """
 

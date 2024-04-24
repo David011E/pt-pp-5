@@ -50,7 +50,7 @@ def all_services(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
+                sweetify.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('all_services'))
 
             
@@ -97,7 +97,7 @@ class CreateCheckoutSessionView(LoginRequiredMixin, View):
             subscriptions = stripe.Subscription.list(customer=customer.id)
             for subscription in subscriptions.auto_paging_iter():
                 if subscription['status'] == 'active' and subscription['items']['data'][0]['price']['id'] == product.stripe_price_id:
-                    messages.error(request, "You are already subscribed to this product.")
+                    sweetify.error(request, "You are already subscribed to this product.")
                     return redirect(reverse('checkout_cancel'))
 
         # Continue with creating the checkout session

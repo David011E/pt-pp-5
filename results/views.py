@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .forms import ReviewForm
 from .models import Review 
+from django.contrib.auth.decorators import login_required
 
 import sweetify
 
@@ -16,6 +17,7 @@ def results(request):
     return render(request, 'results/results.html', context)
 
 
+@login_required
 def add_review(request):
     """ Add a review to the store """
 
@@ -53,7 +55,7 @@ def review_details(request, reviews_id):
     return render(request, 'results/review_details.html', context)
 
 
-
+@login_required
 def edit_review(request, reviews_id):
     """ Edit a review in the store """
 
@@ -83,6 +85,7 @@ def edit_review(request, reviews_id):
     return render(request, template, context)
 
 
+@login_required
 def delete_review(request, reviews_id):
     """ Delete a product in the store """
 
